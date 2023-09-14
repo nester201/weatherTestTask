@@ -11,8 +11,16 @@ interface IWeatherData {
   cloudcover: number[];
 }
 
+interface ICityData {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+  country: string;
+}
+
 class Normalise {
-  normaliseCityData(cities: any[]): ICity[] {
+  normaliseCityData(cities: ICityData[] | any[]): ICity[] {
     return cities.map(city => ({
       id: city.id,
       name: city.name,
