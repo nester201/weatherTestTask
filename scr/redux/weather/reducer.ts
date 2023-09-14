@@ -13,7 +13,7 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    addWeather(state, action: PayloadAction<IWeather[]>) {
+    addWeather(state, action: PayloadAction<IWeather[] | null>) {
       state.todayWeather = action.payload;
     },
   },

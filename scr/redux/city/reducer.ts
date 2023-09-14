@@ -13,7 +13,7 @@ export const citySlice = createSlice({
   name: 'city',
   initialState,
   reducers: {
-    addCity(state, action: PayloadAction<ICity>) {
+    addCity(state, action: PayloadAction<ICity | null>) {
       state.city = action.payload;
     },
   },

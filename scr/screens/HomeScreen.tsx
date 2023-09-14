@@ -49,7 +49,7 @@ const HomeScreen = () => {
   return (
     <BackgroundGradient style={styles.container}>
       <View style={styles.header}>
-        <BackButton />
+        <BackButton removeReduxState />
         <View style={styles.wrapper}>
           <FrameSVG width={40} height={40} fill={colors.borderColor} />
           <Text style={styles.text}>{city?.name}</Text>
