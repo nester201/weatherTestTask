@@ -12,6 +12,9 @@ type Props = {
 
 const Content: React.FC<Props> = ({currentWeather}) => {
   const cloud = useMemo(() => {
+    if (currentWeather.cloudcover > 70 && currentWeather.precipitation > 50) {
+      return 'Rain';
+    }
     if (currentWeather.cloudcover < 20) {
       return 'Clear';
     }
@@ -31,11 +34,15 @@ const Content: React.FC<Props> = ({currentWeather}) => {
         <Text style={styles.title}>{cloud}</Text>
         <View style={styles.wrapper}>
           <Text style={styles.subTitle}>Precipitation:</Text>
-          <Text style={styles.subTitle}>{currentWeather.precipitation}%</Text>
+          <Text style={styles.subTitle}>{currentWeather.precipitation} %</Text>
         </View>
         <View style={styles.wrapper}>
-          <Text style={styles.subTitle}>Rain:</Text>
-          <Text style={styles.subTitle}>{currentWeather.rain}%</Text>
+          <Text style={styles.subTitle}>Wind speed:</Text>
+          <Text style={styles.subTitle}>{currentWeather.windspeed_10m} km/h</Text>
+        </View>
+        <View style={styles.wrapper}>
+          <Text style={styles.subTitle}>Relative humidity:</Text>
+          <Text style={styles.subTitle}>{currentWeather.relativehumidity} %</Text>
         </View>
       </BackgroundGradient>
     );

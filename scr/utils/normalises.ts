@@ -4,8 +4,9 @@ import {IWeather} from '../interfaces /IWeather';
 interface IWeatherData {
   time: string[];
   temperature_2m: number[];
-  precipitation: number[];
-  rain: number[];
+  relativehumidity_2m: number[];
+  precipitation_probability: number[];
+  windspeed_10m: number[];
   cloudcover: number[];
 }
 
@@ -22,8 +23,9 @@ export function normaliseCityData(cities: any[]): ICity[] {
 export function normaliseWeather(weather: IWeatherData) {
   const time: string[] = weather.time;
   const temperature: number[] = weather.temperature_2m;
-  const precipitation: number[] = weather.precipitation;
-  const rain: number[] = weather.rain;
+  const relativehumidity: number[] = weather.relativehumidity_2m;
+  const precipitation: number[] = weather.precipitation_probability;
+  const windspeed: number[] = weather.windspeed_10m;
   const cloudcover: number[] = weather.cloudcover;
 
   const combinedArray: IWeather[] = [];
@@ -32,8 +34,9 @@ export function normaliseWeather(weather: IWeatherData) {
     const weatherObject = {
       time: time[i],
       temperature: temperature[i],
+      relativehumidity: relativehumidity[i],
       precipitation: precipitation[i],
-      rain: rain[i],
+      windspeed_10m: windspeed[i],
       cloudcover: cloudcover[i],
     };
     combinedArray.push(weatherObject);

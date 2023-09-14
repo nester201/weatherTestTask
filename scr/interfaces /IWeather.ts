@@ -1,7 +1,8 @@
 export interface IWeather {
   time: string;
   temperature: number;
+  relativehumidity: number;
   precipitation: number;
-  rain: number;
+  windspeed_10m: number;
   cloudcover: number;
 }
