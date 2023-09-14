@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
 import style from '../../theme/style';
 import colors from '../../theme/colors';
@@ -9,7 +9,10 @@ import {IWeather} from '../../interfaces /IWeather';
 import WeatherSliderItem from './WeatherSliderItem';
 import dayjs from 'dayjs';
 
-const WeatherSlider = () => {
+type Props = {
+  forecast?: IWeather[];
+};
+const WeatherSlider: React.FC<Props> = ({forecast}) => {
   const weather = useSelector(selectWeather.getTodayWeather);
   const currentHour = dayjs().hour();
 
@@ -24,12 +27,17 @@ const WeatherSlider = () => {
 
   return (
     <BackgroundGradient style={styles.container} gradientColors={['#129fe6', '#24acf0']}>
-      <FlatList data={filteredWeatherTime} renderItem={renderResults} horizontal contentContainerStyle={{gap: 10}} />
+      <FlatList
+        data={forecast ? forecast : filteredWeatherTime}
+        renderItem={renderResults}
+        horizontal
+        contentContainerStyle={styles.flexContainer}
+      />
     </BackgroundGradient>
   );
 };
 
-export default WeatherSlider;
+export default memo(WeatherSlider);
 
 const styles = StyleSheet.create({
   container: {
@@ -41,5 +49,8 @@ const styles = StyleSheet.create({
     gap: 20,
     paddingVertical: 25,
     paddingHorizontal: 20,
+  },
+  flexContainer: {
+    gap: 10,
   },
 });

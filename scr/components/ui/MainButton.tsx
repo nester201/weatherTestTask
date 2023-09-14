@@ -14,7 +14,7 @@ type Props = {
 const MainButton: React.FC<Props> = ({onPress, title, loading, style, border, disable}) => {
   const containerMainStyle = useMemo(
     () => [containerStyle, style && style, disable && styles.disable, border && styles.containerBorder],
-    [style, border]
+    [disable, style, border]
   );
 
   return (

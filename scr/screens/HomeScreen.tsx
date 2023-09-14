@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ActivityIndicator, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BackgroundGradient from '../components/ui/BackgroundGradient';
 import FrameSVG from '../assets/icons/frame.svg';
 import colors from '../theme/colors';
@@ -14,9 +14,11 @@ import {getImageWeather} from '../utils/getImageWeather';
 import WeatherSlider from '../components/Home/WeatherSlider';
 import {weatherActions} from '../redux/weather/reducer';
 import BackButton from '../components/ui/BackButton';
+import {useNavigationApp} from '../hooks/useNavigationApp';
 
-const MainScreen = () => {
+const HomeScreen = () => {
   const city = useSelector(selectCity.getCity);
+  const {navigate} = useNavigationApp();
   const [currentWeather, setCurrentWeather] = useState<IWeather>();
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -40,6 +42,10 @@ const MainScreen = () => {
     }
   }, [city, dispatch]);
 
+  const onPressForecast = useCallback(() => {
+    navigate('ForecastScreen');
+  }, [navigate]);
+
   return (
     <BackgroundGradient style={styles.container}>
       <View style={styles.header}>
@@ -48,6 +54,11 @@ const MainScreen = () => {
           <FrameSVG width={40} height={40} fill={colors.borderColor} />
           <Text style={styles.text}>{city?.name}</Text>
         </View>
+      </View>
+      <View style={styles.actionWrapper}>
+        <TouchableOpacity onPress={onPressForecast}>
+          <Text style={styles.actionText}>Forecast days</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.imageWrapper}>
         {!loading && cloudImage ? <>{cloudImage}</> : <ActivityIndicator color={colors.white} size="large" />}
@@ -64,7 +75,7 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -73,11 +84,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    flex: 0.5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
     gap: 20,
+  },
+  actionWrapper: {
+    alignItems: 'flex-end',
+    paddingHorizontal: 20,
+    flex: 0.2,
+  },
+  actionText: {
+    ...style.text,
+    fontSize: 18,
+    lineHeight: 20,
   },
   wrapper: {
     flexDirection: 'row',

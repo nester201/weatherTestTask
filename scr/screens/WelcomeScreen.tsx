@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import FilledView from '../components/ui/FilledView';
 import MainButton from '../components/ui/MainButton';
@@ -11,9 +11,10 @@ import {selectCity} from '../redux/city/selectors';
 const WelcomeScreen = () => {
   const {navigate} = useNavigationApp();
   const city = useSelector(selectCity.getCity);
+  const disable = useMemo(() => !!city, [city]);
 
   const onPress = useCallback(() => {
-    navigate('MainScreen');
+    navigate('HomeScreen');
   }, [navigate]);
 
   return (
@@ -28,7 +29,7 @@ const WelcomeScreen = () => {
       </View>
       <View style={styles.wrapper}>
         <CitySelect city={city} />
-        <MainButton title="Let`s go" onPress={onPress} disable={!city} />
+        <MainButton title="Let`s go" onPress={onPress} disable={!disable} />
       </View>
     </FilledView>
   );

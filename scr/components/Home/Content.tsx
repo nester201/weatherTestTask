@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     fontSize: 90,
     lineHeight: 90,
     color: colors.white,
-    fontStyle: 'italic',
   },
   subTitle: {
     ...style.text,

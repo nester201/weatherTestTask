@@ -1,5 +1,5 @@
 export type TypeRootStackParamList = {
   WelcomeScreen: undefined;
-  MainScreen: undefined;
-  SettingScreen: undefined;
+  HomeScreen: undefined;
+  ForecastScreen: undefined;
 };

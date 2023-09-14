@@ -21,10 +21,5 @@ const BackButton: React.FC = () => {
 export default memo(BackButton);
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 30,
-    left: 30,
-    zIndex: 5,
-  },
+  container: {},
 });
